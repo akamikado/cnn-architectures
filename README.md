@@ -1,4 +1,4 @@
 # CNN Architectures
 
-In this repository implementations of the following architectures are available:
+Following architectures are implemented:
 - LeNet-5
