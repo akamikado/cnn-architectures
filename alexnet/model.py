@@ -13,14 +13,14 @@ val_datagen = ImageDataGenerator(rescale=1./255)
 # Create data generators for training and validation data
 train_generator = train_datagen.flow_from_directory(
     train_dir,
-    target_size=(227, 227),
+    target_size=(224, 224),
     batch_size=128,
     class_mode='categorical'
 )
 
 val_generator = val_datagen.flow_from_directory(
     val_dir,
-    target_size=(227, 227),
+    target_size=(224, 224),
     batch_size=128,
     class_mode='categorical'
 )
@@ -70,7 +70,7 @@ def create_alexnet(input_shape, num_classes):
     return model
 
 
-input_shape = (227, 227, 3)
+input_shape = (224, 224, 3)
 
 model = create_alexnet(input_shape, 200)
 
