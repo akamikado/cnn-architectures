@@ -3,8 +3,8 @@ from tensorflow.keras import models, layers
 from tensorflow.keras.preprocessing.image import ImageDataGenerator
 
 # Define paths to training and validation directories
-train_dir = 'dataset/train'
-val_dir = 'dataset/val'
+train_dir = '../datasets/tiny_imagenet/train'
+val_dir = '../datasets/tiny_imagenet/val'
 
 # Create ImageDataGenerator instances for training and validation data
 train_datagen = ImageDataGenerator(rescale=1./255)
