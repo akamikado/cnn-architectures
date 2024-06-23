@@ -5,3 +5,5 @@ Following architectures are implemented:
 - AlexNet
 - VGG-16
 - Inception-v1 (GoogleNet)
+- Inception-v3
+- ResNet-50
