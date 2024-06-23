@@ -1,6 +1,28 @@
 import tensorflow as tf
 from tensorflow.keras.layers import Conv2D, AveragePooling2D, MaxPooling2D, Dense, Concatenate, Dropout
 
+train_dir = '../datasets/flower_photos'
+
+img_size = (224, 224)
+batch_size = 16
+
+train_ds = tf.keras.preprocessing.image_dataset_from_directory(
+    train_dir,
+    validation_split=0.2,
+    subset="training",
+    seed=123,
+    image_size=img_size,
+    batch_size=batch_size
+)
+validation_ds = tf.keras.preprocessing.image_dataset_from_directory(
+    train_dir,
+    validation_split=0.2,
+    subset="validation",
+    seed=123,
+    image_size=img_size,
+    batch_size=batch_size
+)
+
 
 def ConvLayer(input, filters, kernel_size=(1, 1), strides=1):
     x = Conv2D(filters=filters, kernel_size=kernel_size,
@@ -154,3 +176,11 @@ def InceptionV3():
     model = tf.keras.models.Model(input, [x, Aux], name='Inception-v3')
 
     return model
+
+
+model = InceptionV3()
+model.compile(optimizer='adam',
+              loss='sparse_categorical_crossentropy', metrics=['accuracy'])
+model.fit(train_ds, validation_data=validation_ds, epochs=15)
+
+model.save('inception-v3.keras')

@@ -1,6 +1,28 @@
 import tensorflow as tf
 from tensorflow.keras.layers import Conv2D, MaxPooling2D, Flatten, Dense, AveragePooling2D, Dropout, GlobalAveragePooling2D
 
+train_dir = '../datasets/flower_photos'
+
+img_size = (224, 224)
+batch_size = 16
+
+train_ds = tf.keras.preprocessing.image_dataset_from_directory(
+    train_dir,
+    validation_split=0.2,
+    subset="training",
+    seed=123,
+    image_size=img_size,
+    batch_size=batch_size
+)
+validation_ds = tf.keras.preprocessing.image_dataset_from_directory(
+    train_dir,
+    validation_split=0.2,
+    subset="validation",
+    seed=123,
+    image_size=img_size,
+    batch_size=batch_size
+)
+
 
 def Inception(input_layer, f1, f2_1, f2_3, f3_1, f3_5, f4):
     # path 1
@@ -78,3 +100,11 @@ def GoogleNet():
     model = tf.keras.Model(inputs=input_layer, outputs=[m, m1, m2])
 
     return model
+
+
+model = GoogleNet()
+model.compile(optimizer='adam',
+              loss='sparse_categorical_crossentropy', metrics=['accuracy'])
+model.fit(train_ds, validation_data=validation_ds, epochs=15)
+
+model.save('googlenet.keras')

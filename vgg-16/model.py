@@ -10,7 +10,7 @@ train_ds = image_dataset_from_directory(
     validation_split=0.2,
     seed=128,
     image_size=(224, 224),
-    batch_size=32
+    batch_size=16
 )
 
 val_ds = image_dataset_from_directory(
@@ -19,7 +19,7 @@ val_ds = image_dataset_from_directory(
     validation_split=0.2,
     seed=128,
     image_size=(224, 224),
-    batch_size=32
+    batch_size=16
 )
 
 
