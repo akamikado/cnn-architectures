@@ -7,3 +7,4 @@ Following architectures are implemented:
 - Inception-v1 (GoogleNet)
 - Inception-v3
 - ResNet-50
+- Xception
